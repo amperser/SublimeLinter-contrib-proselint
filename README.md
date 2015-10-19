@@ -1,156 +1,67 @@
-<img src="logo.png" alt="proselint logo" width="200">
+SublimeLinter-contrib-proselint
+================================
 
-[![Build Status](https://travis-ci.org/amperser/proselint.svg)](https://travis-ci.org/amperser/proselint)
-[![Code Climate](https://codeclimate.com/repos/5538989ee30ba0793100090f/badges/e10a2fe18a9256d69e2a/gpa.svg)](https://codeclimate.com/repos/5538989ee30ba0793100090f/feed)
-[![Coverage Status](https://coveralls.io/repos/amperser/proselint/badge.svg?branch=master&service=github&t=2lhJpx)](https://coveralls.io/github/amperser/proselint?branch=master)
-![Lint score](http://img.shields.io/badge/lintscore_v0.1.0-98.8-blue.svg)
-[![Dependency Status](https://gemnasium.com/amperser/proselint.svg)](https://gemnasium.com/amperser/proselint)
+[![Build Status](https://travis-ci.org/amperser/proselint.svg?branch=master)](https://travis-ci.org/amperser/proselint)
 
-Writing is notoriously hard, even for the best writers. Yet there is a tremendous amount of knowledge about the discipline strewn across usage guides, dictionaries, technical manuals, essays, pamphlets, websites, and the hearts and minds of great authors and editors. But poring over Strunk & White hardly makes one a better writer — it turns you into neither Strunk nor White. And nobody has the capacity to apply all the advice from *Garner’s Modern American Usage*, a 975-page usage guide, to everything they write. In fact, the whole notion that one becomes a better writer by reading advice on writing rests on untenable assumptions about learning and memory. The traditional formats of knowledge about writing are thus essentially inert, waiting to be transformed.
+This linter plugin for [SublimeLinter][docs] provides an interface to [proselint](http://proselint.com). It will be used with files that have the “markdown”, “text”, or “plain text” syntaxes.
 
-We devised a simple solution: `proselint`, a linter for prose. (A linter is a computer program that, like a spell checker, scans through a document and analyzes it.)
+## Installation
+SublimeLinter 3 must be installed in order to use this plugin. If SublimeLinter 3 is not installed, please follow the instructions [here][installation].
 
-`proselint` places the world’s greatest writers and editors by your side, where they whisper suggestions on how to improve your prose. You’ll be guided by advice inspired by Bryan Garner, David Foster Wallace, Chuck Palahniuk, Steve Pinker, Mary Norris, Mark Twain, Elmore Leonard, George Orwell, Matthew Butterick, William Strunk, E.B. White, Philip Corbett, Ernest Gowers, and the editorial staff of the world’s finest literary magazines and newspapers, among others. Our goal is to aggregate knowledge about best practices in writing and to make that knowledge immediately accessible to all authors in the form of a linter for prose.
+### Linter installation
+Before using this plugin, you must ensure that `proselint` is installed on your system. To install `proselint`, do the following:
 
-`proselint` is a command-line utility that can be integrated into existing tools.
- 
-### Installation
+1. Install [Python](http://python.org/download/) and [pip](http://www.pip-installer.org/en/latest/installing.html).
 
-To get this up and running, install it using pip: `pip install proselint`.
+1. Install `proselint` by typing the following in a terminal:
+   ```
+   [sudo] pip install proselint
+   ```
 
-### Usage
+**Note:** This plugin requires `proselint` 0.3.4 or later.
 
-You can run `proselint` on a document:
+### Linter configuration
+In order for `proselint` to be executed by SublimeLinter, you must ensure that its path is available to SublimeLinter. Before going any further, please read and follow the steps in [“Finding a linter executable”](http://sublimelinter.readthedocs.org/en/latest/troubleshooting.html#finding-a-linter-executable) through “Validating your PATH” in the documentation.
 
-```bash
-❯ proselint text.md
-```
+Once you have installed and configured `proselint`, you can proceed to install the SublimeLinter-contrib-proselint plugin if it is not yet installed.
 
-This prints a list of suggestions to stdout, one per line. Each suggestion will have the form:
+### Plugin installation
+Please use [Package Control][pc] to install the linter plugin. This will ensure that the plugin will be updated when new versions are available. If you want to install from source so you can modify the source code, you probably know what you are doing so we won’t cover that here.
 
-```bash
-text.md:<line>:<column>: <check_name> <message>
-```
+To install via Package Control, do the following:
 
-For example,
+1. Within Sublime Text, bring up the [Command Palette][cmd] and type `install`. Among the commands you should see `Package Control: Install Package`. If that command is not highlighted, use the keyboard or mouse to select it. There will be a pause of a few seconds while Package Control fetches the list of available plugins.
 
-```bash
-text.md:0:10: wallace.uncomparables Comparison of an uncomparable: 'unique' can not be compared.
-```
+1. When the plugin list appears, type `proselint`. Among the entries you should see `SublimeLinter-contrib-proselint`. If that entry is not highlighted, use the keyboard or mouse to select it.
 
-The command-line utility can also print the list of suggestions in JSON using the `--json` flag. In this case, the output is considerably richer:
+## Settings
+For general information on how SublimeLinter works with settings, please see [Settings][settings]. For information on generic linter settings, please see [Linter Settings][linter-settings].
 
-```javascript
-{
-    // Type of check that output this suggestion.
-    check: "wallace.uncomparables",
+In addition to the standard SublimeLinter settings, SublimeLinter-contrib-proselint provides its own settings through a config file, `.proselintrc`.
 
-    // Message to describe the suggestion.
-    message: "Comparison of an uncomparable: 'unique' can not be compared.",
+## Contributing
+If you would like to contribute enhancements or fixes, please do the following:
 
-    // The person or organization giving the suggestion.
-    source: "David Foster Wallace"
+1. Fork the main repository, http://github.com/amperser/proselint. This plugin can be found in `/plugins/sublime/`
+1. Hack on a separate topic branch off the latest `master`.
+1. Commit to the topic branch and push it.
+1. Create a pull request.
+1. Be patient.  ;-)
 
-    // URL pointing to the source material.
-    source_url: "http://www.telegraph.co.uk/a/9715551"
+Please note that modifications should follow these coding guidelines:
 
-    // Line where the error starts.
-    line: 0,
+- Indent is 4 spaces.
+- Code should pass flake8 and pep257 linters.
+- Vertical whitespace helps readability; don’t be afraid to use it.
+- Please use descriptive variable names. No abbreviations unless they are well known.
 
-    // Column where the error starts.
-    column: 10,
+Thank you for helping out!
 
-    // Index in the text where the error starts.
-    start: 10,
-
-    // Index in the text where the error ends.
-    end: 21,
-
-    // start - end
-    extent: 11,
-
-    // How important is this? Can be "suggestion", "warning", or "error".
-    severity: "warning",
-
-    // Possible replacements.
-    replacements: [
-        {
-            value: "unique"
-        }
-    ]
-}
-```
-
-### Checks
-
-You can disable any of the checks by modifying `.proselintrc`.
-
-| ID    | Description     |
-| ----- | --------------- |
-| `butterick.symbols` | Using the right symbol |
-| `carlin.filth` | Words to avoid |
-| `consistency.spacing` | Consistent sentence spacing |
-| `consistency.spelling` | Consistent use of British vs. American spelling |
-| `garner.airlinese` | Avoiding jargon of the airline industry |
-| `garner.am_pm` | Using the right form for the time of day |
-| `garner.animal_labels` | Likening things to animals using fun words |
-| `garner.archaism` | Avoiding archaic forms |
-| `garner.back_formations` | Avoiding needless backformations |
-| `garner.capitalization` | Captializing what ought to be capitalized |
-| `garner.cliches` | Avoiding cliché |
-| `garner.commercialese` | Avoiding jargon of the commercial world |
-| `garner.dates` | Stylish formatting of dates |
-| `garner.denizen_labels` | Calling people the right names |
-| `garner.illogic` | Avoiding illogical forms |
-| `garner.jargon` | Avoiding miscellaneous jargon |
-| `garner.malapropisms` | Avoiding common malapropisms |
-| `garner.many_a` | Many a singular |
-| `garner.misspelling` | Avoiding common misspellings missed by spell-check |
-| `garner.mixed_metaphors` | Not mixing metaphors |
-| `garner.mondegreens` | Avoiding mondegreens |
-| `garner.needless_variants` | Using the preferred form |
-| `garner.oxymorons` | Avoiding oxymorons |
-| `garner.preferred_forms` | Miscellaneous preferred forms |
-| `garner.punctuation` | Using the right punctuation |
-| `garner.redundancy` | Avoiding redundancy |
-| `garner.sexism` | Avoiding sexist language |
-| `gowers.overworked_metaphors` | Overworked metaphors |
-| `inc.corporate_speak` | Avoiding corporate buzzwords |
-| `leonard.exclamation` | Avoiding hyperbolic use of exclamation |
-| `leonard.hell` | Avoiding a common cliché |
-| `lilienfeld.terms_to_avoid` | Avoiding misused psychological terms |
-| `misc.annotations` | Catching annotations left in the text |
-| `misc.chatspeak` | Avoiding lolling and other chatspeak |
-| `misc.credit_card` | Keeping credit card numbers secret |
-| `misc.currency` | Avoiding redundant currency symbols |
-| `misc.hyperbolic` | Not being hyperbolic |
-| `misc.link_checker` | Linking only to existing sites |
-| `misc.password` | Keeping passwords secret |
-| `misc.whence` | Usage of the word "whence" |
-| `nfl.naughty_words` | Avoiding words banned by the NFL |
-| `nordquist.redundancy` | Avoiding redundancy and saying things twice |
-| `norris.denizen_labels` | Using the right denizen label |
-| `ogilvy.pretension` | Avoiding being pretentious |
-| `orwell.debased` | Avoiding debased language |
-| `oxford.venery_terms` | Call groups of animals by the right name |
-| `palahniuk.suddenly` | Avoiding the word suddenly |
-| `pinker.apologizing` | Being confident |
-| `pinker.hedging` | Not hedging |
-| `pinker.latin` | Avoiding overuse of Latin phrases |
-| `pinker.metaconcepts` | Avoiding overuse of metaconcepts |
-| `pinker.narcisissm` | Talking about the subject, not its study |
-| `pinker.scare_quotes` | Using scare quotes only when needed |
-| `strunk_white.composition` | Avoiding wordy phrases |
-| `strunk_white.greylist` | Words to avoid |
-| `strunk_white.usage` | Misc. usage recommendations |
-| `twain.damn` | Avoiding the word "very" |
-| `wallace.tense_present` | Misc. advice |
-| `wallace.uncomparables` | Not comparing uncomparables |
-| `write_good.cliches` | Avoiding cliches |
-| `write_good.lexical_illusions` | Avoiding lexical illusions |
-| `write_good.weasel_words` | Avoiding weasel words |
-| `wsj.athletes` | Spelling the names of athletes correctly |
-
-### Contributing
-
-Interested in contributing to `proselint`? Great — there are plenty of ways you can help. Read more on [our website](http://proselint.com/contributing/), where we describe how you can help us build `proselint` into the greatest writing tool in the world.
+[docs]: http://sublimelinter.readthedocs.org
+[installation]: http://sublimelinter.readthedocs.org/en/latest/installation.html
+[locating-executables]: http://sublimelinter.readthedocs.org/en/latest/usage.html#how-linter-executables-are-located
+[pc]: https://sublime.wbond.net/installation
+[cmd]: http://docs.sublimetext.info/en/sublime-text-3/extensibility/command_palette.html
+[settings]: http://sublimelinter.readthedocs.org/en/latest/settings.html
+[linter-settings]: http://sublimelinter.readthedocs.org/en/latest/linter_settings.html
+[inline-settings]: http://sublimelinter.readthedocs.org/en/latest/settings.html#inline-settings
