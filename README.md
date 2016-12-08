@@ -11,7 +11,7 @@ SublimeLinter 3 must be installed in order to use this plugin. If SublimeLinter 
 ### Linter installation
 Before using this plugin, you must ensure that `proselint` is installed on your system. To install `proselint`, do the following:
 
-1. Install [Python](http://python.org/download/) and [pip](http://www.pip-installer.org/en/latest/installing.html).
+1. Install [Python](http://python.org/download/) and [pip](http://www.pip-installer.org/en/latest/installing).
 
 1. Install `proselint` by typing the following in a terminal:
    ```
