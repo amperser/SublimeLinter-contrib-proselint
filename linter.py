@@ -16,7 +16,7 @@ class Proselint(Linter):
 
     """Provides an interface to proselint."""
 
-    syntax = ('html', 'markdown', 'plain text')
+    syntax = ('markdown', 'plain text')
     cmd = 'proselint'
     executable = None
     version_args = '--version'
