@@ -16,7 +16,7 @@ class Proselint(Linter):
 
     """Provides an interface to proselint."""
 
-    syntax = ('html', 'markdown', 'plain text')
+    syntax = ('*')
     cmd = 'proselint'
     executable = None
     version_args = '--version'
@@ -28,7 +28,9 @@ class Proselint(Linter):
     multiline = True
     line_col_base = (1, 1)
     tempfile_suffix = 'pltmp'
-    selectors = {}
+    selectors = {
+        '*': 'text.html.markdown, text.plain, text.tex.latex, comment'
+    }
     word_re = None
     defaults = {}
     inline_settings = None
